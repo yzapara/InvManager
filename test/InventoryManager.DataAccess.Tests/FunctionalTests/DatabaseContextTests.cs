@@ -12,7 +12,7 @@ namespace InventoryManager.DataAccess.Tests.FunctionalTests
         {
             var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
             options = optionsBuilder.
-                UseSqlServer(System.Environment.GetEnvironmentVariable("SqlConSring")).
+                UseSqlServer(System.Environment.GetEnvironmentVariable("SqlConString")).
                 Options;
         }
 
