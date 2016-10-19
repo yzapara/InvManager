@@ -18,7 +18,7 @@ Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "InventoryManager.DataAccess
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "InventoryManager.WebApi", "src\InventoryManager.WebApi\InventoryManager.WebApi.xproj", "{E51476E0-3ACD-47A7-B339-CFFCEF20A209}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "InventoryManager.WebApplication", "InventoryManager.WebApplication\InventoryManager.WebApplication.xproj", "{C09C2498-04CE-4794-B760-9F379A0C10E5}"
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "InventoryManager.WebApplication", "src\InventoryManager.WebApplication\InventoryManager.WebApplication.xproj", "{C09C2498-04CE-4794-B760-9F379A0C10E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
