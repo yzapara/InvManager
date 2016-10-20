@@ -8,36 +8,32 @@ function createTable() {
         type: 'GET',
         crossDomain: true,
         dataType: 'json',
-        success: function (properties) {
-            if ($("table").length == 0) {
-                $("body").append("<table></table>");
-            }
-            $.each(properties, function (index, property) {
-                $("table").append(buildRow(property));
+        success: function (json) {
+            jsonData = json;                        //json.data
+            jsonColumns = Object.keys(json[0]);;    //json.columns
+
+            columnsDataConfig = [];
+            jsonColumns.forEach(function (item) {
+                columnsDataConfig.push({ data: item });
             });
+
+            tableHeaders = '';
+            $.each(jsonColumns, function (i, val) {
+                tableHeaders += "<th>" + val + "</th>";
+            });
+
+            $("#tableDiv").empty();
+            $("#tableDiv").append('<table id="displayTable" class="display" cellspacing="0" width="100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
+
+            $('#displayTable').DataTable({
+                data: jsonData,
+                dataSrc: '',
+                "columns": columnsDataConfig
+            });
+
         },
         error: function (request, message, error) {
             handleException(request, message, error);
         }
     });
-}
-
-function buildRow(property) {
-    var ret =
-      "<tr>" +
-       "<td>" + property.name + "</td>" +
-       "<td>" + property.dataType + "</td>" +
-       "<td>" + property.description + "</td>" +
-      "</tr>";
-    return ret;
-}
-
-function handleException(request, message, error) {
-    var msg = "";
-    msg += "Code: " + request.status + "\n";
-    msg += "Text: " + request.statusText + "\n";
-    if (request.responseJSON != null) {
-        msg += "Message" + request.responseJSON.Message + "\n";
-    }
-    alert(msg);
 }
