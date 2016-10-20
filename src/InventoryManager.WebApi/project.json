@@ -1,4 +1,6 @@
 {
+  "userSecretsId": "aspnet-InventoryManager.WebApplication-a4553ce7-97b2-4c06-9600-68ccffc7dc3e",
+
   "dependencies": {
     "Microsoft.NETCore.App": {
       "version": "1.0.1",
@@ -20,7 +22,11 @@
   },
 
   "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final",
+    "Microsoft.Extensions.SecretManager.Tools": {
+      "version": "1.0.0-preview2-final",
+      "imports": "portable-net45+win8+dnxcore50"
+    }
   },
 
   "frameworks": {
