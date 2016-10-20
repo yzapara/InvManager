@@ -8,13 +8,13 @@ namespace InventoryManager.WebApi.Controllers
     [Route("api/[controller]")]
     public class PropertyController : Controller
     {
-        private string connectionString = string.Empty;
+        private string databaseId = "dev";
 
         // GET api/property
         [HttpGet]
         public IEnumerable<Property> Get()
         {
-            var context = DatabaseContext.GetOrCreate(connectionString);
+            var context = DatabaseContext.GetOrCreate(databaseId);
             return context.Property;
         }
 
@@ -22,7 +22,7 @@ namespace InventoryManager.WebApi.Controllers
         [HttpGet("{id}")]
         public Property Get(int id)
         {
-            var context = DatabaseContext.GetOrCreate(connectionString);
+            var context = DatabaseContext.GetOrCreate(databaseId);
             return context.Property.SingleOrDefault(item => item.Id == id);
         }
 
@@ -30,7 +30,7 @@ namespace InventoryManager.WebApi.Controllers
         [HttpPost]
         public void Post([FromBody]Property value)
         {
-            var context = DatabaseContext.GetOrCreate(connectionString);
+            var context = DatabaseContext.GetOrCreate(databaseId);
             if (context.Property.SingleOrDefault(item => item.Id == value.Id) != null)
                 context.Property.Attach(value);
             else
@@ -42,7 +42,7 @@ namespace InventoryManager.WebApi.Controllers
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]Property value)
         {
-            var context = DatabaseContext.GetOrCreate(connectionString);
+            var context = DatabaseContext.GetOrCreate(databaseId);
             if (context.Property.SingleOrDefault(item => item.Id == value.Id) != null)
                 context.Property.Attach(value);
             context.SaveChanges();
@@ -52,7 +52,7 @@ namespace InventoryManager.WebApi.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var context = DatabaseContext.GetOrCreate(connectionString);
+            var context = DatabaseContext.GetOrCreate(databaseId);
             var value = context.Property.SingleOrDefault(item => item.Id == id);
             if (value != null)
                 context.Property.Remove(value);

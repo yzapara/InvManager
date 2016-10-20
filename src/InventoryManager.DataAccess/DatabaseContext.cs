@@ -12,6 +12,10 @@ namespace InventoryManager.DataAccess
         public DbSet<Element> Element { get; set; }
         public DbSet<ElementToPropertyList> ElementToPropertyList { get; set; }
 
+        protected DatabaseContext()
+        {
+        }
+
         public DatabaseContext(DbContextOptions<DatabaseContext> options) :
             base(options)
         {
@@ -20,18 +24,18 @@ namespace InventoryManager.DataAccess
         private static Dictionary<string, DatabaseContext> databaseContexts = new Dictionary<string, DatabaseContext>();
         private static object databaseContextsSync = new object();
 
-        public static DatabaseContext GetOrCreate(string connectionString)
+        public static DatabaseContext GetOrCreate(string contextId)
         {
             lock (databaseContextsSync)
             {
-                if (!databaseContexts.ContainsKey(connectionString))
+                if (!databaseContexts.ContainsKey(contextId))
                 {
                     var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
-                    var options = optionsBuilder.UseSqlServer(connectionString).Options;
-                    var context = new DatabaseContext(options);
-                    databaseContexts.Add(connectionString, context);
+                    var options = optionsBuilder.UseSqlServer(contextId).Options;
+                    var context = contextId == "dev" ? new DatabaseContext() : new DatabaseContext(options); // TODO: Correct to use in dedug and release.
+                    databaseContexts.Add(contextId, context);
                 }
-                return databaseContexts[connectionString];
+                return databaseContexts[contextId];
             }
         }
 
