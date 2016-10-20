@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System.Collections.Generic;
 
 namespace InventoryManager.DataAccess
 {
@@ -15,6 +15,32 @@ namespace InventoryManager.DataAccess
         public DatabaseContext(DbContextOptions<DatabaseContext> options) :
             base(options)
         {
+        }
+
+        private static Dictionary<string, DatabaseContext> databaseContexts = new Dictionary<string, DatabaseContext>();
+        private static object databaseContextsSync = new object();
+
+        public static DatabaseContext GetOrCreate(string connectionString)
+        {
+            lock (databaseContextsSync)
+            {
+                if (!databaseContexts.ContainsKey(connectionString))
+                {
+                    var optionsBuilder = new DbContextOptionsBuilder<DatabaseContext>();
+                    var options = optionsBuilder.UseSqlServer(connectionString).Options;
+                    var context = new DatabaseContext(options);
+                    databaseContexts.Add(connectionString, context);
+                }
+                return databaseContexts[connectionString];
+            }
+        }
+
+        public static void Remove(string connectionString)
+        {
+            lock (databaseContextsSync)
+            {
+                databaseContexts.Remove(connectionString);
+            }
         }
     }
 }

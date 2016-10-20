@@ -6,56 +6,56 @@ using System.Linq;
 namespace InventoryManager.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class PropertyController : Controller
+    public class ElementController : Controller
     {
         private string connectionString = string.Empty;
 
-        // GET api/property
+        // GET api/element
         [HttpGet]
-        public IEnumerable<Property> Get()
+        public IEnumerable<Element> Get()
         {
             var context = DatabaseContext.GetOrCreate(connectionString);
-            return context.Property;
+            return context.Element;
         }
 
-        // GET api/property/5
+        // GET api/element/5
         [HttpGet("{id}")]
-        public Property Get(int id)
+        public Element Get(int id)
         {
             var context = DatabaseContext.GetOrCreate(connectionString);
-            return context.Property.SingleOrDefault(item => item.Id == id);
+            return context.Element.SingleOrDefault(item => item.Id == id);
         }
 
-        // POST api/property
+        // POST api/element
         [HttpPost]
-        public void Post([FromBody]Property value)
+        public void Post([FromBody]Element value)
         {
             var context = DatabaseContext.GetOrCreate(connectionString);
-            if (context.Property.SingleOrDefault(item => item.Id == value.Id) != null)
-                context.Property.Attach(value);
+            if (context.Element.SingleOrDefault(item => item.Id == value.Id) != null)
+                context.Element.Attach(value);
             else
-                context.Property.Add(value);
+                context.Element.Add(value);
             context.SaveChanges();
         }
 
-        // PUT api/property/5
+        // PUT api/element/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Property value)
+        public void Put(int id, [FromBody]Element value)
         {
             var context = DatabaseContext.GetOrCreate(connectionString);
-            if (context.Property.SingleOrDefault(item => item.Id == value.Id) != null)
-                context.Property.Attach(value);
+            if (context.Element.SingleOrDefault(item => item.Id == value.Id) != null)
+                context.Element.Attach(value);
             context.SaveChanges();
         }
 
-        // DELETE api/property/5
+        // DELETE api/element/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
             var context = DatabaseContext.GetOrCreate(connectionString);
-            var value = context.Property.SingleOrDefault(item => item.Id == id);
+            var value = context.Element.SingleOrDefault(item => item.Id == id);
             if (value != null)
-                context.Property.Remove(value);
+                context.Element.Remove(value);
         }
     }
 }
