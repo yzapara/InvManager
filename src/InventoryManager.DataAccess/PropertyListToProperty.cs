@@ -14,11 +14,11 @@ namespace InventoryManager.DataAccess
         [Column("property_id")]
         public int PropertyId { get; set; }
 
-        [ForeignKey("PropertyId")]
-        public virtual Property Property { get; set; }
-
         [Column("property_list_id")]
         public int PropertyListId { get; set; }
+
+        [ForeignKey("PropertyId")]
+        public virtual Property Property { get; set; }
 
         [ForeignKey("PropertyListId")]
         public virtual PropertyList PropertyList { get; set; }

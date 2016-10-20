@@ -16,8 +16,5 @@ namespace InventoryManager.DataAccess
 
         [Column("description")]
         public string Description { get; set; }
-
-        [Column("readonly")]
-        public bool Readonly { get; set; }
     }
 }
