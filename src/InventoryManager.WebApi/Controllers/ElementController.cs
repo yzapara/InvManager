@@ -8,7 +8,7 @@ namespace InventoryManager.WebApi.Controllers
     [Route("api/[controller]")]
     public class ElementController : Controller
     {
-        private readonly List<Element> items = new List<Element>(new[]
+        private List<Element> items = new List<Element>(new[]
         {
             new Element() {Id=0, Name="element_0_name", Description="element_0_description" },
             new Element() {Id=1, Name="element_1_name", Description="element_1_description" },

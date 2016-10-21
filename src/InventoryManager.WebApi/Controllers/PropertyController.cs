@@ -1,55 +1,81 @@
 ﻿using InventoryManager.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
-using System.Linq;
+using InventoryManager.WebApi.Repositories;
 
 namespace InventoryManager.WebApi.Controllers
 {
     [Route("api/[controller]")]
     public class PropertyController : Controller
     {
-        private readonly List<Property> items = new List<Property>(new[]
+        private IPropertiesRepository _items { get; set; }
+        public PropertyController(IPropertiesRepository todoItems)
         {
-            new Property() {Id=0, Name="property_0_name",Description="property_0_description",DataType="property_0_data_type" },
-            new Property() {Id=1, Name="property_1_name",Description="property_1_description",DataType="property_1_data_type" },
-            new Property() {Id=2, Name="property_2_name",Description="property_2_description",DataType="property_2_data_type" },
-        });
+            _items = todoItems;
+        }
 
         // GET api/property
         [HttpGet]
         public IEnumerable<Property> Get()
         {
-            return items;
+            return _items.GetAll();
         }
 
         // GET api/property/5
-        [HttpGet("{id}")]
-        public Property Get(int id)
+        [HttpGet("{id}", Name = "GetProperty")]
+        public IActionResult Get(int id)
         {
-            return items.SingleOrDefault(item => item.Id == id);
+            var item = _items.Find(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return new ObjectResult(item);
         }
 
         // POST api/property
         [HttpPost]
-        public void Post([FromBody]Property value)
+        public IActionResult Post([FromBody]Property item)
         {
-            value.Id = items.Count;
-            items.Add(value);
+            if (item == null)
+            {
+                return BadRequest();
+            }
+            _items.Add(item);
+            return Get(item.Id);// TODO CreatedAtRoute("GetProperty", new { id = item.Id }, item);            
         }
 
         // PUT api/property/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]Property value)
+        public IActionResult Put(int id, [FromBody]Property item)
         {
-            value.Id = id;
-            items[id] = value;
+            if (item == null || item.Id != id)
+            {
+                return BadRequest();
+            }
+
+            var todo = _items.Find(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            _items.Update(item);
+            return new NoContentResult();
         }
 
         // DELETE api/property/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
-            items.RemoveAt(id);
+            var todo = _items.Find(id);
+            if (todo == null)
+            {
+                return NotFound();
+            }
+
+            _items.Remove(id);
+            return new NoContentResult();
         }
     }
 }
