@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InventoryManager.DataAccess
 {
-    [Table("element")]
-    public class Element
+    [Table("datatype")]
+    public class Datatype
     {
         [Column("id")]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,16 +14,10 @@ namespace InventoryManager.DataAccess
         [Column("name")]
         public string Name { get; set; }
 
+        [Column("dbname")]
+        public string DbName { get; set; }
+
         [Column("description")]
         public string Description { get; set; }
-
-        [Column("parent_type_id")]
-        public int? ParentTypeId { get; set; }
-
-        [Column("root_type_id")]
-        public int? RootTypeId { get; set; }
-
-        [ForeignKey("ParentTypeId")]
-        public virtual Element ParentType { get; set; }
     }
 }

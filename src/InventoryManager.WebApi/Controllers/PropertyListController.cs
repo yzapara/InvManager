@@ -8,48 +8,54 @@ namespace InventoryManager.WebApi.Controllers
     [Route("api/[controller]")]
     public class PropertyListController : Controller
     {
-        private readonly List<PropertyList> items = new List<PropertyList>(new[]
-        {
-            new PropertyList() {Id=0, Name="property_list_0_name", Description="property_list_0_description"},
-            new PropertyList() {Id=1, Name="property_list_1_name", Description="property_list_1_description"},
-            new PropertyList() {Id=2, Name="property_list_2_name", Description="property_list_2_description"},
-        });
+        private string databaseId = "dev";
 
         // GET api/propertylist
         [HttpGet]
         public IEnumerable<PropertyList> Get()
         {
-            return items;
+            var context = DatabaseContext.GetOrCreate(databaseId);
+            return context.PropertyList;
         }
 
         // GET api/propertylist/5
         [HttpGet("{id}")]
         public PropertyList Get(int id)
         {
-            return items.SingleOrDefault(item => item.Id == id);
+            var context = DatabaseContext.GetOrCreate(databaseId);
+            return context.PropertyList.SingleOrDefault(item => item.Id == id);
         }
 
         // POST api/propertylist
         [HttpPost]
         public void Post([FromBody]PropertyList value)
         {
-            value.Id = items.Count;
-            items.Add(value);
+            var context = DatabaseContext.GetOrCreate(databaseId);
+            if (context.PropertyList.SingleOrDefault(item => item.Id == value.Id) != null)
+                context.PropertyList.Attach(value);
+            else
+                context.PropertyList.Add(value);
+            context.SaveChanges();
         }
 
         // PUT api/propertylist/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody]PropertyList value)
         {
-            value.Id = id;
-            items[id] = value;
+            var context = DatabaseContext.GetOrCreate(databaseId);
+            if (context.PropertyList.SingleOrDefault(item => item.Id == value.Id) != null)
+                context.PropertyList.Attach(value);
+            context.SaveChanges();
         }
 
         // DELETE api/propertylist/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            items.RemoveAt(id);
+            var context = DatabaseContext.GetOrCreate(databaseId);
+            var value = context.PropertyList.SingleOrDefault(item => item.Id == id);
+            if (value != null)
+                context.PropertyList.Remove(value);
         }
     }
 }

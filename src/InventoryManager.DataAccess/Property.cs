@@ -17,7 +17,10 @@ namespace InventoryManager.DataAccess
         [Column("description")]
         public string Description { get; set; }
 
-        [Column("data_type")]
-        public string DataType { get; set; }
+        [Column("datatype_id")]
+        public int DatatypeId { get; set; }
+
+        [ForeignKey("DatatypeId")]
+        public virtual Datatype Datatype { get; set; }
     }
 }
