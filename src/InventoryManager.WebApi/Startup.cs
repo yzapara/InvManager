@@ -48,7 +48,7 @@ namespace InventoryManager.WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-            app.UseCors(builder => builder.WithOrigins("http://localhost:62446").AllowAnyHeader().AllowAnyMethod());
+            app.UseCors(builder => builder.WithOrigins(Configuration.GetSection("WebApplicationHost").Value).AllowAnyHeader().AllowAnyMethod());
 
             app.UseMvc();
         }

@@ -48,7 +48,6 @@ namespace InventoryManager.WebApplication
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            services.AddCors();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -75,9 +74,6 @@ namespace InventoryManager.WebApplication
             app.UseStaticFiles();
 
             app.UseIdentity();
-
-            // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors(builder => builder.WithOrigins("http://localhost:5000/api", "http://localhost:59359/"));
 
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
 
