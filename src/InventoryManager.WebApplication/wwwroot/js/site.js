@@ -1,5 +1,5 @@
 ﻿$(document).ready(function () {
-    createTable("Element");
+    createTable("Property");
 });
 
 function createTable(tableName) {
@@ -9,7 +9,7 @@ function createTable(tableName) {
         crossDomain: true,
         dataType: 'json',
         success: function (json) {
-            jsonData = json.properties;
+            jsonData = json.data;
             jsonColumns = json.headers;
 
             columnsDataConfig = [];

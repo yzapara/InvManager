@@ -27,14 +27,14 @@ namespace InventoryManager.WebApi.Controllers
         [HttpGet]
         public object Get()
         {
-            return new { headers = _headers, properties = _properties };
+            return new { headers = _headers, data = _properties };
         }
 
         // GET api/headeredproperty/5
         [HttpGet("{id}")]
         public object Get(int id)
         {
-            return new { headers = _headers, properties = _properties.Where(property => property.Id == id) };
+            return new { headers = _headers, data = _properties.Where(property => property.Id == id) };
         }
     }
 }
