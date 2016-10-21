@@ -23,7 +23,7 @@ function createTable() {
             });
 
             $("#tableDiv").empty();
-            $("#tableDiv").append('<table id="displayTable" class="display"><thead><tr>' + tableHeaders + '</tr></thead></table>');
+            $("#tableDiv").append('<table id="displayTable" class="display" width= "100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
 
             $('#displayTable').DataTable({
                 data: jsonData,
