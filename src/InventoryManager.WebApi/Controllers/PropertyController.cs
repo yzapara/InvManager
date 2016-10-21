@@ -8,7 +8,7 @@ namespace InventoryManager.WebApi.Controllers
     [Route("api/[controller]")]
     public class PropertyController : Controller
     {
-        private readonly List<Property> properties = new List<Property>(new[]
+        private readonly List<Property> items = new List<Property>(new[]
         {
             new Property() {Id=0, Name="property_0_name",Description="property_0_description",DataType="property_0_data_type" },
             new Property() {Id=1, Name="property_1_name",Description="property_1_description",DataType="property_1_data_type" },
@@ -19,22 +19,22 @@ namespace InventoryManager.WebApi.Controllers
         [HttpGet]
         public IEnumerable<Property> Get()
         {
-            return properties;
+            return items;
         }
 
         // GET api/property/5
         [HttpGet("{id}")]
         public Property Get(int id)
         {
-            return properties.SingleOrDefault(property => property.Id == id);
+            return items.SingleOrDefault(item => item.Id == id);
         }
 
         // POST api/property
         [HttpPost]
         public void Post([FromBody]Property value)
         {
-            value.Id = properties.Count;
-            properties.Add(value);
+            value.Id = items.Count;
+            items.Add(value);
         }
 
         // PUT api/property/5
@@ -42,14 +42,14 @@ namespace InventoryManager.WebApi.Controllers
         public void Put(int id, [FromBody]Property value)
         {
             value.Id = id;
-            properties[id] = value;
+            items[id] = value;
         }
 
         // DELETE api/property/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            properties.RemoveAt(id);
+            items.RemoveAt(id);
         }
     }
 }

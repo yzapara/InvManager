@@ -1,10 +1,10 @@
 ﻿$(document).ready(function () {
-    createTable();
+    createTable("Element");
 });
 
-function createTable() {
+function createTable(tableName) {
     $.ajax({
-        url: 'http://localhost:59359/api/Property/',
+        url: 'http://localhost:59359/api/' + tableName +'/',
         type: 'GET',
         crossDomain: true,
         dataType: 'json',
