@@ -43,7 +43,8 @@
     "Microsoft.VisualStudio.Web.CodeGenerators.Mvc": {
       "version": "1.0.0-preview2-final",
       "type": "build"
-    }
+    },
+    "SaasKit.Multitenancy": "1.1.4"
   },
 
   "tools": {
@@ -95,5 +96,9 @@
   "scripts": {
     "prepublish": [ "bower install", "dotnet bundle" ],
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+
+  "commands": {
+    "web": "Microsoft.AspNet.Server.Kestrel --server.urls=http://localhost:60000;http://localhost:60001;http://localhost:60002"
   }
 }

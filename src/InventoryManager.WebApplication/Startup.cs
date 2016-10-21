@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using InventoryManager.WebApplication.Data;
 using InventoryManager.WebApplication.Models;
 using InventoryManager.WebApplication.Services;
+
 
 namespace InventoryManager.WebApplication
 {
@@ -39,6 +36,8 @@ namespace InventoryManager.WebApplication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddMultitenancy<AppTenant, CachingAppTenantResolver>();
+            
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -48,11 +47,13 @@ namespace InventoryManager.WebApplication
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
-            services.AddCors();
+
+            services.Configure<MultitenancyOptions>(Configuration.GetSection("Multitenancy"));
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -73,14 +74,11 @@ namespace InventoryManager.WebApplication
             }
 
             app.UseStaticFiles();
-
+            app.UseMultitenancy<AppTenant>();
             app.UseIdentity();
 
-            // Shows UseCors with CorsPolicyBuilder.
-            app.UseCors(builder => builder.WithOrigins("http://localhost:5000/api", "http://localhost:59359/"));
-
             // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

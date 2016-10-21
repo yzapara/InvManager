@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SaasKit.Multitenancy;
 
 namespace InventoryManager.WebApplication.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly AppTenant tenant;
+
+        public HomeController(ITenant<AppTenant> tenant)
+        {
+            this.tenant = tenant?.Value;
+        }
+
         public IActionResult Index()
         {
             return View();
@@ -15,7 +23,7 @@ namespace InventoryManager.WebApplication.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = $"Your application description page for {tenant?.Name ?? "Default"}";
 
             return View();
         }
