@@ -30,10 +30,15 @@
             url: 'http://localhost:59359/api/property/',
             data: JSON.stringify(formData),
             dataType: 'json',
-            encode: true
+            encode: true,
+            success: function (json) {
+                event.preventDefault();
+                createTable("HeaderedProperty");
+            },
+            error: function (request, message, error) {
+                handleException(request, message, error);
+            }
         });
-        event.preventDefault();
-        createTable("HeaderedProperty");
     });
 });
 
@@ -75,7 +80,7 @@ function handleException(request, message, error) {
     var msg = "";
     msg += "Code: " + request.status + "\n";
     msg += "Text: " + request.statusText + "\n";
-    if (request.responseJSON != null) {
+    if (request.responseJSON !== null) {
         msg += "Message" + request.responseJSON.Message + "\n";
     }
     alert(msg);

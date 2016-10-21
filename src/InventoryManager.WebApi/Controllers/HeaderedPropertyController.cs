@@ -19,8 +19,7 @@ namespace InventoryManager.WebApi.Controllers
         {
             { "id","Id" },
             { "name","Name" },
-            { "description","Description" },
-            { "dataType","Data Type" }
+            { "description","Description" }
         };
 
         // GET api/headeredproperty
