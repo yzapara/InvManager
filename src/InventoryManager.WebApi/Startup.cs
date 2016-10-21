@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using InventoryManager.WebApi.Repositories;
 
 namespace InventoryManager.WebApi
 {
@@ -29,6 +26,9 @@ namespace InventoryManager.WebApi
         {
             // Add framework services.
             services.AddMvc();
+            services.AddCors();
+
+            services.AddSingleton<IPropertiesRepository, PropertiesRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -36,6 +36,7 @@ namespace InventoryManager.WebApi
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+            app.UseCors(builder => builder.WithOrigins("http://localhost:62446").AllowAnyHeader().AllowAnyMethod());
 
             app.UseMvc();
         }
