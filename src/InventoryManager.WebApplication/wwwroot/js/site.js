@@ -33,7 +33,7 @@
             encode: true
         });
         event.preventDefault();
-        createTable("property");
+        createTable("HeaderedProperty");
     });
 });
 
