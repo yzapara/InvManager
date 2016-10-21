@@ -1,19 +1,19 @@
 ﻿$(document).ready(function () {
     $("#propertyMenuItem").click(function () {
         createTable("HeaderedProperty");
+        $('#Menu').children().removeClass('active');
+        $('#propertyMenuItem').closest("li").addClass('active');
     })
     $("#propertyListMenuItem").click(function () {
         createTable("HeaderedPropertyList");
+        $('#Menu').children().removeClass('active');
+        $('#propertyListMenuItem').closest("li").addClass('active');
     })
     $("#elementMenuItem").click(function () {
         createTable("HeaderedElement");
+        $('#Menu').children().removeClass('active');
+        $('#elementMenuItem').closest("li").addClass('active');
     })
-
-    $("#saveButton").on("click", function (e) {
-        e.preventDefault();
-        addRecord();
-    });
-
 
     $('form').submit(function (event) {
         var formData = {
