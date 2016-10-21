@@ -1,5 +1,13 @@
 ﻿$(document).ready(function () {
-    createTable("property");
+    $("#propertyMenuItem").click(function () {
+        createTable("HeaderedProperty");
+    })
+    $("#propertyListMenuItem").click(function () {
+        createTable("HeaderedPropertyList");
+    })
+    $("#elementMenuItem").click(function () {
+        createTable("HeaderedElement");
+    })
 
     $("#saveButton").on("click", function (e) {
         e.preventDefault();
@@ -32,7 +40,7 @@
 
 function createTable(tableName) {
     $.ajax({
-        url: 'http://localhost:59359/api/Headered' + tableName +'/',
+        url: 'http://localhost:59359/api/' + tableName + '/',
         type: 'GET',
         crossDomain: true,
         dataType: 'json',

@@ -16,7 +16,7 @@ namespace InventoryManager.WebApi.Controllers
             { "dataType","Data Type" }
         };
 
-        private readonly List<Property> _properties = new List<Property>(new[]
+        private readonly List<Property> _items = new List<Property>(new[]
         {
             new Property() {Id=0, Name="property_0_name",Description="property_0_description",DataType="property_0_data_type" },
             new Property() {Id=1, Name="property_1_name",Description="property_1_description",DataType="property_1_data_type" },
@@ -27,14 +27,14 @@ namespace InventoryManager.WebApi.Controllers
         [HttpGet]
         public object Get()
         {
-            return new { headers = _headers, data = _properties };
+            return new { headers = _headers, data = _items };
         }
 
         // GET api/headeredproperty/5
         [HttpGet("{id}")]
         public object Get(int id)
         {
-            return new { headers = _headers, data = _properties.Where(property => property.Id == id) };
+            return new { headers = _headers, data = _items.Where(item => item.Id == id) };
         }
     }
 }
