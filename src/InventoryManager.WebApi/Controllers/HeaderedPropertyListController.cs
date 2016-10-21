@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace InventoryManager.WebApi.Controllers
 {
     [Route("api/[controller]")]
-    public class HeaderedProperyListController : Controller
+    public class HeaderedPropertyListController : Controller
     {
         private readonly Dictionary<string, string> _headers = new Dictionary<string, string>
         {
