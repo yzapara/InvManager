@@ -4,14 +4,45 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/js/site.js"></script>
-
+    <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css" />
 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
-
 </head>
 <body>
-    <div id="tableDiv" />
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="name" class="col-sm-2 control-label">Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="name" placeholder="Name">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description" class="col-sm-2 control-label">Description</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="description" placeholder="Description">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="datatype" class="col-sm-2 control-label">Data Type</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="datatype" placeholder="Data Type">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">Save</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="panel-body">
+            <div id="tableDiv"></div>
+        </div>
+    </div>
 </body>
 </html>
 
