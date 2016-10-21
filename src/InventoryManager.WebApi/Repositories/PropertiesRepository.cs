@@ -22,9 +22,9 @@ namespace InventoryManager.WebApi.Repositories
 
         public PropertiesRepository()
         {
-            Add(new Property() { Name = "property_0_name", Description = "property_0_description", DataType = "property_0_data_type" });
-            Add(new Property() { Name = "property_1_name", Description = "property_1_description", DataType = "property_1_data_type" });
-            Add(new Property() { Name = "property_2_name", Description = "property_2_description", DataType = "property_2_data_type" });
+            Add(new Property() { Name = "property_0_name", Description = "property_0_description"/*, Datatype = "property_0_data_type"*/ });
+            Add(new Property() { Name = "property_1_name", Description = "property_1_description"/*, Datatype = "property_1_data_type"*/ });
+            Add(new Property() { Name = "property_2_name", Description = "property_2_description"/*, Datatype = "property_2_data_type"*/ });
         }
 
         public void Add(Property item)
