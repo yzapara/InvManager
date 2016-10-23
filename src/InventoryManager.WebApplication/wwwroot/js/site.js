@@ -52,7 +52,7 @@ function createTable(tableName) {
             }
 
             $("#tableDiv").empty();
-            $("#tableDiv").append('<table id="displayTable" class="display" width= "100%"><thead><tr>' + tableHeaders + '</tr></thead></table>');
+            $("#tableDiv").append('<table id="displayTable" class="table table-striped table-bordered" width="100%" cellspacing="0"><thead><tr>' + tableHeaders + '</tr></thead></table>');
 
             $('#displayTable').DataTable({
                 data: jsonData,
