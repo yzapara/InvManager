@@ -4,68 +4,99 @@
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     @if (Environment.GetEnvironmentVariable("ISDEVELOPMENTENV") != null)
     {
-    <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/jquery/dist/jquery.js"></script>
     }
     else
     {
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
     }
     <script src="~/js/site.js"></script>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
 
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 </head>
 <body>
-    <div class="navbar navbar-default" role="navigation">
+
+    <nav class="navbar navbar-default navbar-static-top">
         <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#Menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
                 <a class="navbar-brand" href="#">Inventory Manager</a>
             </div>
-            <div class="navbar-collapse">
-                <ul class="nav navbar-nav" id="Menu">
-                    <li><a href="#" id="propertyMenuItem">Property</a></li>
-                    <li><a href="#" id="propertyListMenuItem">Property List</a></li>
-                    <li><a href="#" id="elementMenuItem">Element</a></li>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="Menu">
+                <ul class="nav navbar-nav">
+                    <li><a href="#" id="Property">Property</a></li>
+                    <li><a href="#" id="PropertyList">Property List</a></li>
+                    <li><a href="#" id="Element">Element</a></li>
                 </ul>
-            </div><!--/.nav-collapse -->
-        </div><!--/.container-fluid -->
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <div class="panel-body">
+        <form class="form-horizontal" role="form">
+            <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-8 col-lg-6">
+                    <input type="text" class="form-control" name="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="description" class="col-sm-2 control-label">Description</label>
+                <div class="col-sm-8 col-lg-6">
+                    <input type="text" class="form-control" name="description" placeholder="Description">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="datatype" class="col-sm-2 control-label">Data Type</label>
+                <div class="col-sm-8 col-lg-6">
+                    <input type="text" class="form-control" name="datatype" placeholder="Data Type">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">[FAKE: Select list]</label>
+                <div class="col-sm-8 col-lg-6">
+                    <select class="form-control">
+                        <option>Select Property 1</option>
+                        <option>Select Property 2</option>
+                        <option>Select Property 3</option>
+                        <option>Select Property 4</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">[FAKE: Mutiple select list]</label>
+                <div class="col-sm-8 col-lg-6">
+                    <select multiple class="form-control">
+                        <option>Select Property 1</option>
+                        <option>Select Property 2</option>
+                        <option>Select Property 3</option>
+                        <option>Select Property 4</option>
+                        <option>Select Property 5</option>
+                        <option>Select Property 6</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-8">
+                    <button type="submit" class="btn btn-default">Save</button>
+                </div>
+            </div>
+        </form>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-body">
-                <form class="form-horizontal" role="form">
-                    <div class="form-group">
-                        <label for="name" class="col-sm-2 control-label">Name</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="name" placeholder="Name">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="description" class="col-sm-2 control-label">Description</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="description" placeholder="Description">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="datatype" class="col-sm-2 control-label">Data Type</label>
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="datatype" placeholder="Data Type">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Save</button>
-                        </div>
-                    </div>
-                </form>
-        </div>
-
-        <div class="panel-body">
-            <div id="tableDiv"></div>
-        </div>
+    <div class="panel-body">
+        <div id="tableDiv"></div>
     </div>
+
     <hr />
     <footer>
         <p>&copy; 2016 - InventoryManager.WebApplication</p>
